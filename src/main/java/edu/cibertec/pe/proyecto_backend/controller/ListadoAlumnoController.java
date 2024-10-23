@@ -1,6 +1,7 @@
 package edu.cibertec.pe.proyecto_backend.controller;
 
 import edu.cibertec.pe.proyecto_backend.dto.AlumnoResponse;
+import edu.cibertec.pe.proyecto_backend.dto.ListadoResponseDTO;
 import edu.cibertec.pe.proyecto_backend.service.ListadoAlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,13 @@ public class ListadoAlumnoController {
     ListadoAlumnoService listadoAlumnoService;
 
     @GetMapping("/alumnos")
-    public List<AlumnoResponse> obtenerListadoAlumno() {
+    public ListadoResponseDTO obtenerListadoAlumno() {
 
         try {
             List<AlumnoResponse> listadoAlumno = listadoAlumnoService.obtenerAlumnos();
-
+            ListadoResponseDTO listadoResponseDTO = new ListadoResponseDTO(listadoAlumno);
             if (listadoAlumno != null) {
-                return listadoAlumno;
+                return listadoResponseDTO;
             } else {
                 return null;
             }
